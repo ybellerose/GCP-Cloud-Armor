@@ -1,7 +1,7 @@
 # cloud-armor
 Terraform deployment for Cloud Armor
 
-Default rule, OWASP Top 10, Rate limiting and Log4j rules are provisied
+Default rule, OWASP Top 10, Rate limiting and Log4j rules are provisionned
 All rules (except the default one) are deployed in Preview mode (without impact on the workload)
 
 The Global Load-balancer is not provisionned via this terraform. You need to take care of this part, manually, via Gcloud or via terraform

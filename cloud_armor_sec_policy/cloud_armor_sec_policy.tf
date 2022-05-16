@@ -4,7 +4,7 @@ resource "google_compute_security_policy" "sec-policy" {
     provider    = google-beta
     project     = var.project_id
     name        = "${var.project_id}-waf-policy"
-    description = "Default rule, Top 10 OWASP & Log4J custom rules"
+    description = "Default rule, Top 10 OWASP, Throttling & Log4J custom rules"
     
 # --------------------------------- 
 # Default rules

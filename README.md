@@ -15,3 +15,5 @@ terraform init
 terraform plan
 terraform apply -auto-approve
 ```
+
+![Cloud Armor](assets/cloud-armor.png)

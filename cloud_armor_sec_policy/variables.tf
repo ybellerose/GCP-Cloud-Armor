@@ -30,7 +30,7 @@ variable "throttle_rules" {
     default = {
         def_rule = {
             action                              = "throttle"
-            priority                            = "3000"
+            priority                            = "4000"
             versioned_expr                      = "SRC_IPS_V1"
             src_ip_ranges                       = ["*"]
             description                         = "Throttling traffic rule"
@@ -53,6 +53,29 @@ variable "throttle_rules" {
         enforce_on_key                      = string
         rate_limit_threshold_count          = number
         rate_limit_threshold_interval_sec   = number
+        preview                             = bool
+        })
+    )
+} 
+
+# --------------------------------- 
+# Countries limitation rules
+# --------------------------------- 
+variable "countries_rules" {
+    default = {
+        def_rule = {
+            action                              = "deny(403)"
+            priority                            = "3000"
+            expression                          = "origin.region_code == 'RU' || origin.region_code == 'CN'"
+            description                         = "Deny if region code is listed"
+            preview                             = true
+        }
+    }
+    type = map(object({
+        action                              = string
+        priority                            = string
+        expression                          = string
+        description                         = string
         preview                             = bool
         })
     )
@@ -203,7 +226,7 @@ variable "owasp_rules" {
     )
 }
 # --------------------------------- 
-# Custom Log4j rule
+# Custom Log4j rules
 # --------------------------------- 
 variable "apache_log4j_rule" {
     default = {

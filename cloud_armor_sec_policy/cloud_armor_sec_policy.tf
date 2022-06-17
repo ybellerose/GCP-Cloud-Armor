@@ -54,6 +54,24 @@ resource "google_compute_security_policy" "sec-policy" {
     }
 
 # --------------------------------- 
+# Country limitation
+# --------------------------------- 
+    dynamic "rule" {
+        for_each = var.countries_rules
+        content {
+            action      = rule.value.action
+            priority    = rule.value.priority
+            description = rule.value.description
+            preview     = rule.value.preview
+            match {
+                expr {
+                    expression = rule.value.expression
+                }
+            }
+        }
+    }
+
+# --------------------------------- 
 # OWASP top 10 rules
 # --------------------------------- 
     dynamic "rule" {

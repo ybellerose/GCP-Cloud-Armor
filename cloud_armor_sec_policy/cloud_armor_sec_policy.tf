@@ -1,10 +1,17 @@
 variable "project_id" {}
+variable "log_level" {}
+variable "json_parsing" {}
 
 resource "google_compute_security_policy" "sec-policy" {
     provider    = google-beta
     project     = var.project_id
     name        = "${var.project_id}-waf-policy"
     description = "Default rule, Top 10 OWASP, Throttling & Log4J custom rules"
+    advanced_options_config{
+        log_level = var.log_level
+        json_parsing = var.json_parsing
+    }
+
     
 # --------------------------------- 
 # Default rules
@@ -22,7 +29,7 @@ resource "google_compute_security_policy" "sec-policy" {
                     src_ip_ranges = rule.value.src_ip_ranges
                 }
             }
-        }    
+        }  
     }
     
 # --------------------------------- 

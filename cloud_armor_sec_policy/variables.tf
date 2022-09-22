@@ -66,7 +66,7 @@ variable "countries_rules" {
         def_rule = {
             action                              = "deny(403)"
             priority                            = "3000"
-            expression                          = "origin.region_code == 'RU' || origin.region_code == 'CN'"
+            expression                          = "'[CN, RU]'.contains(origin.region_code)"
             description                         = "Deny if region code is listed"
             preview                             = true
         }

@@ -3,7 +3,6 @@ variable "log_level" {}
 variable "json_parsing" {}
 
 resource "google_compute_security_policy" "sec-policy" {
-    provider    = google-beta
     project     = var.project_id
     name        = "${var.project_id}-waf-policy"
     description = "Default rule, Top 10 OWASP, Throttling & Log4J custom rules"
@@ -100,7 +99,7 @@ resource "google_compute_security_policy" "sec-policy" {
 # Custom Log4j rule
 # --------------------------------- 
     dynamic "rule" {
-        for_each = var.apache_log4j_rule
+        for_each = var.cves_and_vulnerabilities_rules
         content {
             action      = rule.value.action
             priority    = rule.value.priority

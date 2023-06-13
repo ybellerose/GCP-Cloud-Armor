@@ -91,18 +91,11 @@ variable "owasp_rules" {
             priority    = "1000"
             description = "SQL injection"
             preview     = true
-            
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('sqli-stable',['owasp-crs-v030001-id942110-sqli','owasp-crs-v030001-id942120-sqli','owasp-crs-v030001-id942150-sqli','owasp-crs-v030001-id942180-sqli','owasp-crs-v030001-id942200-sqli','owasp-crs-v030001-id942210-sqli','owasp-crs-v030001-id942260-sqli','owasp-crs-v030001-id942300-sqli','owasp-crs-v030001-id942310-sqli','owasp-crs-v030001-id942330-sqli','owasp-crs-v030001-id942340-sqli','owasp-crs-v030001-id942380-sqli','owasp-crs-v030001-id942390-sqli','owasp-crs-v030001-id942400-sqli','owasp-crs-v030001-id942410-sqli','owasp-crs-v030001-id942430-sqli','owasp-crs-v030001-id942440-sqli','owasp-crs-v030001-id942450-sqli','owasp-crs-v030001-id942251-sqli','owasp-crs-v030001-id942420-sqli','owasp-crs-v030001-id942431-sqli','owasp-crs-v030001-id942460-sqli','owasp-crs-v030001-id942421-sqli','owasp-crs-v030001-id942432-sqli'])"
-            
-            ### Detect Level 1 & 2
-            #expression  = "evaluatePreconfiguredExpr('sqli-stable',['owasp-crs-v030001-id942251-sqli','owasp-crs-v030001-id942420-sqli','owasp-crs-v030001-id942431-sqli','owasp-crs-v030001-id942460-sqli','owasp-crs-v030001-id942421-sqli','owasp-crs-v030001-id942432-sqli'])"
-            
-            ### Detect Level 1,2 & 3
-            #expression  = "evaluatePreconfiguredExpr('sqli-stable',['owasp-crs-v030001-id942421-sqli','owasp-crs-v030001-id942432-sqli'])"
-            
-            ### Detect Level 1,2,3 & 4
-            expression  = "evaluatePreconfiguredExpr('sqli-stable')"
+
+            ### Detect Level severity (0 to 4): 0 mean no rules enabled and 4 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('sqli-v33-stable', {'sensitivity': 4})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('sqli-v33-canary', {'sensitivity': 4})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#cross-site_scripting_xss
         rule_xss = {
@@ -111,11 +104,11 @@ variable "owasp_rules" {
             description = "Cross-site scripting"
             preview     = true
             
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('xss-stable',['owasp-crs-v030001-id941150-xss','owasp-crs-v030001-id941320-xss','owasp-crs-v030001-id941330-xss','owasp-crs-v030001-id941340-xss'])"
-            
-            ### Detect Level 1 & 2
-            expression  = "evaluatePreconfiguredExpr('xss-stable')"
+            ### Detect Level severity (0 to 2): 0 mean no rules enabled and 2 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 2})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('xss-v33-canary', {'sensitivity': 2})"
+      
         }
         #https://cloud.google.com/armor/docs/rule-tuning#local_file_inclusion_lfi
         rule_lfi = {
@@ -124,8 +117,10 @@ variable "owasp_rules" {
             description = "Local file inclusion"
             preview     = true
             
-            ### Detect Level 1
-            expression  = "evaluatePreconfiguredExpr('lfi-stable')"
+            ### Detect Level severity (0 to 1): 0 mean no rules enabled and 1 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('lfi-v33-canary', {'sensitivity': 1})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#remote_code_execution_rce
         rule_rce = {
@@ -134,8 +129,10 @@ variable "owasp_rules" {
             description = "Remote code execution"
             preview     = true
            
-            ### Detect Level 1
-            expression  = "evaluatePreconfiguredExpr('rce-stable')"
+            ### Detect Level severity (0 to 3): 0 mean no rules enabled and 3 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('rce-v33-stable', {'sensitivity': 3})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('rce-v33-canary', {'sensitivity': 3})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#remote_file_inclusion_rfi
         rule_rfi = {
@@ -144,11 +141,10 @@ variable "owasp_rules" {
             description = "Remote file inclusion"
             preview     = true
             
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('rfi-stable', ['owasp-crs-v030001-id931130-rfi'])"
-
-            ### Detect Level 1 & 2
-            expression  = "evaluatePreconfiguredExpr('rfi-stable')"
+            ### Detect Level severity (0 to 2): 0 mean no rules enabled and 2 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('rfi-v33-canary', {'sensitivity': 2})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#method_enforcement
         rule_methodenforcement = {
@@ -156,9 +152,11 @@ variable "owasp_rules" {
             priority    = "1005"
             description = "Method enforcement"
             preview     = true
-            
-            ### Detect Level 1
-            expression  = "evaluatePreconfiguredExpr('methodenforcement-stable')"
+
+            ### Detect Level severity (0 to 1): 0 mean no rules enabled and 1 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('methodenforcement-v33-canary', {'sensitivity': 1})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#scanner_detection
         rule_scandetection = { 
@@ -167,11 +165,10 @@ variable "owasp_rules" {
             description = "Scanner detection"
             preview     = true
             
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('scannerdetection-stable',['owasp-crs-v030001-id913101-scannerdetection','owasp-crs-v030001-id913102-scannerdetection'])"
-
-            ### Detect Level 1 & 2
-            expression  = "evaluatePreconfiguredExpr('scannerdetection-stable')"
+            ### Detect Level severity (0 to 2): 0 mean no rules enabled and 2 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 2})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('scannerdetection-v33-canary', {'sensitivity': 2})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#protocol_attack
         rule_protocolattack = { 
@@ -180,14 +177,11 @@ variable "owasp_rules" {
             description = "Protocol Attack"
             preview     = true
             
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('protocolattack-stable',['owasp-crs-v030001-id921151-protocolattack','owasp-crs-v030001-id921170-protocolattack'])"                  
-            
-            ### Detect Level 1 & 2
-            #expression  = "evaluatePreconfiguredExpr('protocolattack-stable',['owasp-crs-v030001-id921170-protocolattack'])"
-            
-            ### Detect Level 1,2 & 3
-            expression  = "evaluatePreconfiguredExpr('protocolattack-stable')"
+
+            ### Detect Level severity (0 to 3): 0 mean no rules enabled and 3 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('protocolattack-v33-stable', {'sensitivity': 3})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('protocolattack-v33-canary', {'sensitivity': 3})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#php
         rule_php = { 
@@ -196,24 +190,46 @@ variable "owasp_rules" {
             description = "PHP"
             preview     = true
             
-            ### Detect Level 1
-            #expression  = "evaluatePreconfiguredExpr('php-stable',['owasp-crs-v030001-id933151-php','owasp-crs-v030001-id933131-php','owasp-crs-v030001-id933161-php','owasp-crs-v030001-id933111-php'])"
-            
-            ### Detect Level 1 & 2
-            #expression  = "evaluatePreconfiguredExpr('php-stable',['owasp-crs-v030001-id933131-php','owasp-crs-v030001-id933161-php','owasp-crs-v030001-id933111-php'])"
-            
-            ### Detect Level 1,2 & 3
-            expression  = "evaluatePreconfiguredExpr('php-stable')"
+            ### Detect Level severity (0 to 3): 0 mean no rules enabled and 3 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 3})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('php-v33-canary', {'sensitivity': 3})"
         }
         #https://cloud.google.com/armor/docs/rule-tuning#session_fixation
         rule_sessionfixation = { 
             action      = "deny(403)"
             priority    = "1009"
             description = "Session Fixation"
-            preview     = true
+            preview     = true            
             
-            ### Detect Level 1
-            expression  = "evaluatePreconfiguredExpr('sessionfixation-stable')"
+            ### Detect Level severity (0 to 1): 0 mean no rules enabled and 1 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('sessionfixation-v33-canary', {'sensitivity': 1})"
+        }
+        #https://cloud.google.com/armor/docs/waf-rules#java_attack
+        rule_java = { 
+            action      = "deny(403)"
+            priority    = "1010"
+            description = "Java attack"
+            preview     = true            
+            
+            ### Detect Level severity (0 to 3): 0 mean no rules enabled and 3 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('java-v33-stable', {'sensitivity': 3})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('java-v33-canary', {'sensitivity': 3})"
+        }
+        #https://cloud.google.com/armor/docs/waf-rules#nodejs_attack
+        rule_nodejs = { 
+            action      = "deny(403)"
+            priority    = "1011"
+            description = "NodeJS attack"
+            preview     = true            
+            
+            ### Detect Level severity (0 to 1): 0 mean no rules enabled and 1 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('nodejs-v33-stable', {'sensitivity': 1})"
+            #Latest
+            #expression  =  "evaluatePreconfiguredWaf('nodejs-v33-canary', {'sensitivity': 1})"
         }
     }
     type = map(object({
@@ -226,9 +242,9 @@ variable "owasp_rules" {
     )
 }
 # --------------------------------- 
-# Custom Log4j rules
+# Custom rules
 # --------------------------------- 
-variable "apache_log4j_rule" {
+variable "cves_and_vulnerabilities_rules" {
     default = {
         # https://cloud.google.com/armor/docs/rule-tuning#cves_and_other_vulnerabilities
         rule_apache_log4j = {
@@ -237,17 +253,18 @@ variable "apache_log4j_rule" {
             description     = "Apache Log4j CVE-2021-44228"
             preview         = true
 
-            ### Detect Level 1 Basic rule
-            #expression      = "evaluatePreconfiguredExpr('cve-canary',['owasp-crs-v030001-id144228-cve','owasp-crs-v030001-id244228-cve','owasp-crs-v030001-id344228-cve'])"
-            
-            ### Detect Level 1 only
-            #expression      = "evaluatePreconfiguredExpr('cve-canary',['owasp-crs-v030001-id244228-cve','owasp-crs-v030001-id344228-cve'])"
-            
-            ### Detect Level 1 & 3, decrease sensitivity
-            #expression      = "evaluatePreconfiguredExpr('cve-canary',['owasp-crs-v030001-id244228-cve'])"
+            ### Detect Level severity (0 to 3): 0 mean no rules enabled and 3 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('cve-canary', {'sensitivity': 3})"
+        }
+        # https://cloud.google.com/armor/docs/rule-tuning#cves_and_other_vulnerabilities
+        rule_json_sqli = {
+            action          = "deny(403)"
+            priority        = "2001"
+            description     = "JSON-formatted content SQLi"
+            preview         = true
 
-            ### Detect Level 1 & 3 - very sensitive
-            expression      = "evaluatePreconfiguredExpr('cve-canary')"
+            ### Detect Level severity (0 to 2): 0 mean no rules enabled and 2 is the most sensitive
+            expression  =  "evaluatePreconfiguredWaf('json-sqli-canary', {'sensitivity': 2})"
         }
     }
     type = map(object({

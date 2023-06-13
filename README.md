@@ -10,11 +10,11 @@ The policy is provided with default settings, how can be modified using the vari
 - log_level = VERBOSE
 
 ## Provisioned Rules
-The rules are based on the owasp modsecurity CRS 3.0:
+The rules are based on the owasp modsecurity CRS 3.3:
 - Default rule
 - OWASP Top 10
 - Rate Limiting
-- Log4j
+- Cves and vulnerabilities (Log4J and Json-SQLi)
 - Geo fencing
 
 All rules (except the default one) are deployed in Preview mode (without impact on the workload), don't forget to remove the preview mode to block real traffic.

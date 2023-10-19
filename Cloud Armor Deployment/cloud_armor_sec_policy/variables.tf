@@ -248,7 +248,7 @@ variable "cves_and_vulnerabilities_rules" {
     default = {
         # https://cloud.google.com/armor/docs/rule-tuning#cves_and_other_vulnerabilities
         rule_apache_log4j = {
-            action          = "deny(403)"
+            action          = "deny(401)"
             priority        = "2000"
             description     = "Apache Log4j CVE-2021-44228"
             preview         = true

@@ -1,33 +1,19 @@
 # cloud-armor
 Terraform deployment for Cloud Armor
 
-This code is not ment to be used in a production environment!
-Please review before usage.
 
-## Policy options
-The policy is provided with default settings, how can be modified using the variables.tf file: 
-- json_parsing = DISABLED
-- log_level = VERBOSE
+##Disclaimer
+WARNING: This code is not meant to be used in a production environment! In which case, proceed with caution. But be warned, kitten deaths may occur.
 
-## Provisioned Rules
-The rules are based on the owasp modsecurity CRS 3.3:
-- Default rule
-- OWASP Top 10
-- Rate Limiting
-- Cves and vulnerabilities (Log4J and Json-SQLi)
-- Geo fencing
+Just don't say we didn't warn you. 
 
-All rules (except the default one) are deployed in Preview mode (without impact on the workload), don't forget to remove the preview mode to block real traffic.
+And remember, if anything goes wrong, you can always blame the kitten.
 
-## Limitation
-- The Global Load-balancer is not provisionned via this terraform. You need to take care of this part, manually, via Gcloud or via terraform
-- If your endpoint if a JSON endpoint, be sure your enforce JSON-PARSING, otherwise, the WAF expression may not be able to get their jobs done properly
 
-## Provision infrastructure
-```
-terraform init
-terraform plan
-terraform apply -auto-approve
-```
+# Sections
+## Cloud Armor Deployment
+If you're looking for a way to impress your friends and colleagues, then what are you waiting for? Deploy your Cloud Armor policies with Terraform today! They'll be so amazed by your skills, they'll probably start calling you "The Cloud Armor Maestro".
 
-![Cloud Armor](assets/cloud-armor.png)
+## Cloud Armor Tunning
+Cloud Armor tuning is like taking your Cloud Armor to the spa - it gets a deep clean and a few tweaks to make it feel its best.
+In other words, Cloud Armor tuning is important! It helps your Cloud Armor work better and protects your applications from bad actors. So don't neglect your Cloud Armor tuning - give it the love it deserves!

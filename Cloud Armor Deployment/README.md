@@ -35,4 +35,4 @@ terraform plan
 terraform apply -auto-approve
 ```
 
-![Cloud Armor](assets/cloud-armor.png)
+![Cloud Armor](assets/Screenshot.png)
